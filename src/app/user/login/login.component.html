@@ -1,0 +1,32 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="p-4 rounded bg-white shadow-sm" style="max-width: 400px; margin: auto; margin-top: 100px;">
+  <h4 class="mb-3">Login</h4>
+
+  <div class="mb-3">
+    <input class="form-control" type="email" placeholder="Email" formControlName="email" />
+    <div class="text-danger small" *ngIf="loginForm.controls['email'].invalid && loginForm.controls['email'].touched">
+      Valid email required.
+    </div>
+  </div>
+
+  <div class="mb-3 input-group">
+    <input
+      class="form-control"
+      [type]="showPassword ? 'text' : 'password'"
+      placeholder="Password"
+      formControlName="password"
+    />
+    <button type="button" class="btn btn-outline-secondary" (click)="togglePasswordVisibility()">
+      <i class="bi" [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
+    </button>
+  </div>
+
+  <div class="text-danger small mb-3" *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched">
+    Password is required.
+  </div>
+
+  <button type="submit" class="btn btn-primary w-100" [disabled]="loginForm.invalid">Login</button>
+
+    <div class="text-center mt-3">
+    Don't have an account? <a routerLink="/register">Register now</a>
+  </div>
+</form>

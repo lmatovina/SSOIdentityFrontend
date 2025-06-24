@@ -1,0 +1,74 @@
+<div class="mb-4 h2 text-success">
+  Sign up
+</div>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="mb-3">
+    <input class="form-control bg-body-secondary" placeholder="Name" formControlName="ime">
+    <div class="error-feedback" *ngIf="hasDisplayableError('Name') && form.controls.ime.hasError('required')">
+      Please enter your name.
+    </div>
+      <div class="mb-3"></div>
+    <input class="form-control bg-body-secondary" placeholder="Surname" formControlName="prezime">
+    <div class="error-feedback" *ngIf="hasDisplayableError('Surname') && form.controls.prezime.hasError('required')">
+      Please enter your last name.
+    </div>
+  </div>
+  <div class="mb-3">
+    <input class="form-control bg-body-secondary" placeholder="Email" formControlName="email">
+    <div class="error-feedback" *ngIf="hasDisplayableError('email')">
+      <div *ngIf="form.controls.email.hasError('required')">
+        Please enter your email address.
+      </div>
+      <div *ngIf="form.controls.email.hasError('email')">
+        Please enter a valid email address.
+      </div>
+    </div>
+  </div>
+ <div class="mb-3">
+  <div class="input-group">
+    <input
+      class="form-control bg-body-secondary"
+      [type]="showPassword ? 'text' : 'password'"
+      placeholder="Password"
+      formControlName="password"
+    />
+    <button type="button" class="btn btn-outline-secondary" (click)="togglePasswordVisibility('password')">
+      <i class="bi" [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
+    </button>
+  </div>
+  <div class="error-feedback" *ngIf="hasDisplayableError('password')">
+    <ng-container [ngSwitch]="form.controls.password.errors | firstKey">
+      <div *ngSwitchCase="'required'">Please enter your password.</div>
+      <div *ngSwitchCase="'minlength'">At least 6 characters required.</div>
+      <div *ngSwitchCase="'pattern'">One or more special character(s).</div>
+    </ng-container>
+  </div>
+</div>
+
+<!-- CONFIRM PASSWORD FIELD -->
+<div class="mb-3">
+  <div class="input-group">
+    <input
+      class="form-control bg-body-secondary"
+      [type]="showConfirmPassword ? 'text' : 'password'"
+      placeholder="Confirm Password"
+      formControlName="confirmPassword"
+    />
+    <button type="button" class="btn btn-outline-secondary" (click)="togglePasswordVisibility('confirmPassword')">
+      <i class="bi" [ngClass]="showConfirmPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
+    </button>
+  </div>
+  <div class="error-feedback"
+    *ngIf="hasDisplayableError('confirmPassword') && form.controls.confirmPassword.hasError('passwordMismatch')">
+    Passwords don't match.
+  </div>
+</div>
+  <div class="mt-4">
+    <button type="submit" class="btn btn-success w-100 rounded-3">
+      Register
+    </button>
+  </div>
+  <div class="text-center mt-3">
+    Already have an account? <a routerLink="/login">Login here</a>
+  </div>
+</form>
