@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UserWithRoles } from '../models/user-with-roles';
+import { UpdateUserRoleDto } from '../models/update-user-role';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,12 @@ export class UserService {
   return this.http.get<UserWithRoles[]>('http://localhost:5069/api/user/users');
 }
 
-  updateUserRole(userId: string, role: string): Observable<any> {
-    return this.http.put(`${this.apiUrl}/update-role`, { userId, role });
-  }
+updateUserRole(userId: string, newRole: string) {
+  const body: UpdateUserRoleDto = {
+    userId,
+    newRole
+  };
+  console.log('Sending update role body:', body);
+  return this.http.put(`${this.apiUrl}/update-role`, body, { responseType: 'text' });
+}
 }

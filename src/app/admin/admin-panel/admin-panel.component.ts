@@ -33,18 +33,17 @@ export class AdminPanelComponent implements OnInit {
   }
 
   onRoleChange(event: Event, userId: string) {
-  const selectElement = event.target as HTMLSelectElement;
-  const newRole = selectElement.value;
-
+  const newRole = (event.target as HTMLSelectElement).value;
   this.userService.updateUserRole(userId, newRole).subscribe({
     next: () => {
-      console.log('Role updated successfully');
-      // eventualno osvježi podatke ili update UI
+      console.log('User role updated');
+      // nađi korisnika u nizu i ažuriraj njegove role
+      const user = this.users.find(u => u.id === userId);
+      if (user) {
+        user.roles = [newRole]; // ili druga logika ako ima više uloga
+      }
     },
-    error: (err) => {
-      console.error('Error updating role:', err);
-      // možeš prikazati notifikaciju korisniku
-    }
+    error: (err) => console.error('Failed to update role:', err)
   });
 }
 }

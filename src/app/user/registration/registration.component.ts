@@ -33,9 +33,7 @@ export class RegistrationComponent {
 
     return null;
   }
-  ngOnInit() {
-  this.toastr.error('Test error poruka', 'Test');
-}
+
 
   form = this.formBuilder.group({
     ime: ['', Validators.required],
