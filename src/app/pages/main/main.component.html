@@ -1,4 +1,27 @@
-<div class="main-container">
+<!-- Burger gumb -->
+<button class="btn btn-outline-primary m-3" (click)="toggleSidebar()">
+  ☰ Menu
+</button>
+
+<!-- Sidebar meni -->
+<div class="offcanvas offcanvas-start" tabindex="-1" id="sidebarMenu" #sidebar>
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title">Navigacija</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <ul class="list-unstyled">
+      <li class="mb-2">
+        <button class="btn btn-danger w-100" (click)="logout()">Logout</button>
+      </li>
+      <li class="mb-2" *ngIf="isAdmin">
+  <button class="btn btn-secondary w-100" (click)="goToAdmin()">Admin Panel</button>
+</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Glavni sadržaj -->
+<div class="container mt-4">
   <h2>Welcome to Main Page</h2>
-  <button (click)="logout()">Logout</button>
 </div>

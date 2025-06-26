@@ -1,0 +1,26 @@
+<div class="container mt-4">
+  <h2 class="mb-3">Admin Panel - Users</h2>
+
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Email</th>
+        <th>Current Roles</th>
+        <th>Change Role</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.email }}</td>
+        <td>{{ user.roles.join(', ') }}</td>
+        <td>
+          <select class="form-select" (change)="onRoleChange($event, user.id)">
+  <option *ngFor="let role of availableRoles" [value]="role" [selected]="user.roles.includes(role)">
+    {{ role }}
+  </option>
+</select>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
